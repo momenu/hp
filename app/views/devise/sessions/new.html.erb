@@ -1,0 +1,35 @@
+<h2>ログイン</h2>
+
+<%= form_for(resource, as: resource_name, html: { class: "ui fluid form" }, url: session_path(resource_name)) do |f| %>
+  <!-- <% if notice %>
+    <div class="ui error message">
+      <div class="header"><%= pluralize(@member.errors.count, "error") %></div>
+      <ul>
+      <% @hoge.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %> -->
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %>
+    <%= f.password_field :password, autocomplete: "current-password" %>
+  </div>
+
+  <% if devise_mapping.rememberable? %>
+    <div class="ui checkbox">
+      <%= f.check_box :remember_me %>
+      <%= f.label :remember_me %>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit "ログイン", class: "ui blue button" %>
+  </div>
+<% end %>

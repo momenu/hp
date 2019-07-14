@@ -1,0 +1,52 @@
+<h1>チーム分け</h1>
+<%= form_for @match_record, html: { class: "ui fluid form" } do |f| %>
+  <div class="field">
+    <h2>team1</h2>
+    <div>合計レート　<%= @sumTeam1 %></div>
+  </div>
+  <% team1ids = [] %>
+  <% team2ids = [] %>
+  <% @team1.each do |t|%>
+    <div class="fields">
+      <div class="field">
+        <%= "name: #{@members[t][0]}" %>
+      </div>
+      <div class="field">
+        <%= "rate: #{@members[t][1]}" %>
+      </div>
+    </div>
+    <% team1ids.push(@members[t][2]) %>
+  <% end %>
+  <div class="field">
+    <h2>team2</h2>
+    <div>合計レート　<%= @sumTeam2 %></div>
+  </div>
+  <div class="field">
+    <% @team2.each do |t|%>
+      <div class="fields">
+        <div class="field">
+          <%= "name: #{@members[t][0]}" %>
+        </div>
+        <div class="field">
+          <%= "rate: #{@members[t][1]}" %>
+        </div>
+      </div>
+      <% team2ids.push(@members[t][2]) %>
+    <% end %>
+  </div>
+  <h2>勝利チーム</h2>
+  <%= f.hidden_field :team1ids, value: team1ids %>
+  <%= f.hidden_field :team2ids, value: team2ids %>
+  <%= f.hidden_field :player1 %>
+  <%= f.hidden_field :player2 %>
+  <%= f.hidden_field :player3 %>
+  <%= f.hidden_field :player4 %>
+  <%= f.hidden_field :player5 %>
+  <%= f.hidden_field :player6 %>
+  <%= f.hidden_field :player7 %>
+  <%= f.hidden_field :player8 %>
+  <div class="ui">
+    <%= f.submit 'ゲーム開始', class: "ui blue button" %>
+    <%= link_to "キャンセル", :back, {class: "btn btn-default"} %>
+  </div>
+<% end %>

@@ -1,0 +1,49 @@
+<h1>編集</h1>
+
+<%= form_with(model: @match_record, class: "ui fluid form", local: true) do |f| %>
+  <% if @match_record.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@match_record.errors.count, "error") %> prohibited this match_record from being saved:</h2>
+      <ul>
+      <% @match_record.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <% @team1.each do |t|%>
+    <div class="fields">
+      <div class="field">
+        <%= "name: #{@members[t][0]}" %>
+      </div>
+      <div class="field">
+        <%= "rate: #{@members[t][1]}" %>
+      </div>
+    </div>
+    <% team1ids.push(@members[t][2]) %>
+  <% end %>
+  <div class="field">
+    <h2>team2</h2>
+    <div><%= @sumTeam2 %></div>
+  </div>
+  <div class="field">
+    <% @team2.each do |t|%>
+      <div class="fields">
+        <div class="field">
+          <%= "name: #{@members[t][0]}" %>
+        </div>
+        <div class="field">
+          <%= "rate: #{@members[t][1]}" %>
+        </div>
+      </div>
+      <% team2ids.push(@members[t][2]) %>
+    <% end %>
+  </div>
+  <div class="field">
+    <%= f.label :win_team %>
+    <%= f.text_field :win_team %>
+  </div>
+  <div class="ui">
+    <%= f.submit '登録する', class: "ui blue button" %>
+  </div>
+<% end %>

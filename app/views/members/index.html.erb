@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+<h1>メンバー</h1>
+
+<table class="ui table">
+  <thead>
+    <tr>
+      <th>名前</th>
+      <th>レート</th>
+      <th>ゲーム数</th>
+      <th>勝</th>
+      <th>負</th>
+      <th>勝率</th>
+      <th>twitter</th>
+      <th>etc</th>
+      <th></th>
+      <% if user_signed_in? && current_user.maneger? %>
+        <th></th>
+      <% end %>
+      <% if user_signed_in? && current_user.admin? %>
+        <th></th>
+      <% end %>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @members.each do |member| %>
+      <tr>
+        <td><%= member.name %></td>
+        <td><%= member.rate %></td>
+        <td><%= member.game_num %></td>
+        <td><%= member.win_num %></td>
+        <td><%= member.lose_num %></td>
+        <td><%= member.game_num != 0 ? "#{member.win_num / member.game_num}%" : '' %></td>
+        <td>
+          <% if member.twitter.present? %>
+            <%= link_to 'リンク', member.twitter %>
+          <% end %>
+        </td>
+        <td>etc</td>
+        <% if user_signed_in? && current_user.maneger? %>
+          <td><%= link_to '編集', edit_member_path(member) %></td>
+        <% end %>
+        <td><%= link_to '詳細', member %></td>
+        <% if user_signed_in? && current_user.admin? %>
+          <td><%= link_to '削除', member_path(member), method: :delete, data: {confirm: "本当に削除しますか？"} %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<div class="ui two column centered grid">
+  <div class="ui center aligned grid column">
+    <%= paginate @members %>
+  </div>
+</div>

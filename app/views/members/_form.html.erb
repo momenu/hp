@@ -1,0 +1,70 @@
+<%= form_with(model: member, class: "ui fluid form", local: true) do |f| %>
+  <% if member.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(member.errors.count, "error") %> prohibited this member from being saved:</h2>
+      <ul>
+      <% member.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <% if controller.action_name == 'new' || controller.action_name == 'create' %>
+    <div class="field">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+    <div class="field">
+      <%= f.label :rate %>
+      <%= f.text_field :rate %>
+    </div>
+    <div class="field">
+      <%= f.label :discord_id %>
+      <%= f.text_field :discord_id %>
+    </div>
+  <% elsif controller.action_name == 'edit' || controller.action_name == 'update' %>
+    <div class="field">
+      <%= f.label :name %>
+      <%= @member.name %>
+    </div>
+    <% if !current_user.maneger? %>
+      <div class="field">
+        <%= f.label :rate %>
+        <%= @member.rate %>
+      </div>
+    <% else %>
+      <div class="field">
+        <%= f.label :rate %>
+        <%= f.text_field :rate %>
+      </div>
+      <div class="field">
+        <%= f.label :discord_id %>
+        <%= f.text_field :discord_id %>
+      </div>
+    <% end %>
+    <div class="field">
+      <%= f.label :twitter %>
+      <%= f.text_field :twitter %>
+    </div>
+    <% if current_user.admin? %>
+      <div class="field">
+        <%= f.label :position %>
+        <%= f.select :position, Member.positions.keys, selected: @member.position %>
+      </div>
+    <% end %>
+    <% if current_user.general? || current_user.admin? %>
+      <div class="field">
+        <%= f.label :password %>
+        <%= f.text_field :password %>
+      </div>
+      <div class="field">
+        <%= f.label :password_confirmation %>
+        <%= f.text_field :password_confirmation %>
+      </div>
+    <% end %>
+  <% end %>
+  <div class="ui">
+    <%= f.submit '登録', class: "ui blue button" %>
+    <%= link_to "キャンセル", :back, {class: "btn btn-default"} %>
+  </div>
+<% end %>

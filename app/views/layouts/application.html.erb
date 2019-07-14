@@ -1,15 +1,53 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>App</title>
+    <title>sampleHP</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <meta http-equiv="content-language" content="ja">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <div class="ui inverted large borderless fixed fluid menu column">
+      <%= link_to '　AOC　' , root_path, class: "header item" %>
+      <%= link_to ' メンバー ' , members_path, class: "header item" %>
+      <%= link_to ' ゲーム作成 ' , new_match_record_path, class: "header item" %>
+      <%= link_to '新規登録', new_member_path, class: "header item" %>
+      <% if !user_signed_in? %>
+        <%= link_to 'ログイン', login_path, class: "header item" %>
+      <% end %>
+      <div class="right menu">
+        <div class="ui dropdown item">
+          <% if user_signed_in? %>
+            <div class="header">
+              <h4>メニュー</h4>
+            </div>
+            <i class="share square icon"></i>
+            <div class="menu">
+              <div class="item">
+                <small>
+                  <i class="th icon"></i>
+                    <%= link_to 'プロフィール', edit_member_path(current_user) %>
+                </small>
+              </div>
+              <div class="item">
+                <small>
+                  <i class="clipboard outline icon"></i>
+                    <%= link_to 'ログアウト', destroy_user_session_path, method: :delete  %></li>
+                </small>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <h1></h1>
+    <% if alert %>
+      <p class="alert"><%= alert %></p>
+    <% end %>
     <%= yield %>
   </body>
 </html>

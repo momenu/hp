@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<table class="ui show definition table">
+  <tbody>
+    <tr>
+      <td>名前</td>
+      <td><%= @member.name %></td>
+    </tr>
+    <tr>
+      <td>レート</td>
+      <td><%= @member.rate %></td>
+    </tr>
+    <tr>
+      <td>ゲーム数</td>
+      <td><%= @member.game_num %></td>
+    </tr>
+    <tr>
+      <td>勝</td>
+      <td><%= @member.win_num %></td>
+    </tr>
+    <tr>
+      <td>負</td>
+      <td><%= @member.lose_num %></td>
+    </tr>
+    <tr>
+      <td>勝率</td>
+      <td><%= @member.game_num != 0 ? "#{@member.win_num / @member.game_num}%" : '' %></td>
+    </tr>
+    <tr>
+      <td>twitter</td>
+      <td>
+        <% if @member.twitter.present? %>
+          <%= link_to 'リンク', @member.twitter %>
+        <% end %>
+      </td>
+    </tr>
+  </tbody>
+</table>
