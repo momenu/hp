@@ -72,6 +72,6 @@ gem 'semantic-ui-sass', '>= 2.2.14'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'rails-i18n', '~> 5.1'
-gem 'kaminari', '~> 0.17.0'
+gem 'kaminari', '~> 1.2.1'
 gem 'devise'
 gem "pundit"
